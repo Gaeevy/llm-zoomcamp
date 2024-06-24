@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "llm-zoomcamp-wshp"
+version = "0.1.0"
+description = ""
+authors = ["Vlad Goenko <vladislav@offerfit.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+tqdm = "^4.66.4"
+openai = "^1.28.1"
+elasticsearch = "^8.13.1"
+notebook = "^7.1.3"
+python-dotenv = "^1.0.1"
+scikit-learn = "^1.5.0"
+tiktoken = "^0.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
