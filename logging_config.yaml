@@ -1,0 +1,33 @@
+version: 1
+# Set to False to get log messages from external packages you're using
+disable_existing_loggers: False
+
+# Formatters that are assigned to outputs ("handlers") below
+formatters:
+    simple:
+        format: "%(asctime)s - %(name)s - %(levelname)s - %(message).54000s"
+
+# Outputs, one or more of which can be assigned to loggers
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: simple
+        stream: ext://sys.stdout
+
+loggers:
+    urllib3:
+        level: INFO
+    elastic_transport:
+        level: ERROR
+    openai:
+        level: INFO
+    httpcore:
+        level: INFO
+    httpx:
+        level: ERROR
+
+# The root logger
+root:
+  level: DEBUG
+  handlers: [console]
