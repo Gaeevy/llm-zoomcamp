@@ -1,0 +1,24 @@
+name: Apply PR Template Based on Branches
+
+on:
+  pull_request:
+    branches:
+      - prod
+      - test_prod
+
+jobs:
+  apply-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Apply Hotfix Template
+        if: github.event.pull_request.base.ref == 'prod' && github.event.pull_request.head.ref != 'staging'
+        run: |
+          pr_number=${{ github.event.pull_request.number }}
+          template=$(cat .github/prod_hotfix_template.md)
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"body\": \"$template\n\n${{ github.event.pull_request.body }}\"}" \
+            https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number
